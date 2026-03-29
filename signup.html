@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Premium App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <div class="illustration">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Soft gradient background -->
+                    <defs>
+                        <linearGradient id="signupGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#86efac;stop-opacity:0.25" />
+                            <stop offset="100%" style="stop-color:#6ee7b7;stop-opacity:0.15" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <circle cx="100" cy="100" r="95" fill="url(#signupGradient)" opacity="0.6"/>
+                    
+                    <!-- Person with checkmark -->
+                    <circle cx="100" cy="55" r="18" fill="#4ade80" opacity="0.2" stroke="#4ade80" stroke-width="2"/>
+                    <circle cx="100" cy="55" r="14" fill="#86efac" opacity="0.4"/>
+                    
+                    <!-- Body -->
+                    <ellipse cx="100" cy="95" rx="22" ry="28" fill="#4ade80" opacity="0.25"/>
+                    
+                    <!-- Checkmark -->
+                    <path d="M 95 55 L 100 60 L 110 50" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    
+                    <!-- Decorative elements -->
+                    <circle cx="50" cy="80" r="6" fill="#6ee7b7" opacity="0.3"/>
+                    <circle cx="160" cy="110" r="8" fill="#4ade80" opacity="0.2"/>
+                    <path d="M 70 150 Q 75 145 80 150" stroke="#86efac" stroke-width="1.5" fill="none" opacity="0.3"/>
+                </svg>
+            </div>
+
+            <h1 class="title">Create Account</h1>
+            <p class="subtitle">Join us today and start exploring</p>
+
+            <div id="successMessage" class="success-message"></div>
+
+            <form onsubmit="handleSignUp(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        placeholder="John Doe"
+                        required
+                    >
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="signupEmail" 
+                        placeholder="you@example.com"
+                        required
+                    >
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="signupPassword" 
+                            placeholder="Minimum 6 characters"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('signupPassword')">👁️</button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            placeholder="Confirm your password"
+                            required
+                        >
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmPassword')">👁️</button>
+                    </div>
+                    <span class="error-message" id="confirmError"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 28px;">
+                    Create Account
+                </button>
+            </form>
+
+            <!-- Social Login Section -->
+            <div class="social-login">
+                <div class="social-divider">or signup via</div>
+                <div class="social-buttons">
+                    <button type="button" class="social-btn" title="Sign up with Google">G</button>
+                    <button type="button" class="social-btn" title="Sign up with Facebook">f</button>
+                    <button type="button" class="social-btn" title="Sign up with Twitter">𝕏</button>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <p>Already have an account? <a href="signin.html">Sign in here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
