@@ -3,90 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Premium App</title>
+    <title>Sign In - GlassAuth</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="glass-card">
-            <div class="illustration">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Soft gradient background -->
-                    <defs>
-                        <linearGradient id="signinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#86efac;stop-opacity:0.25" />
-                            <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0.15" />
-                        </linearGradient>
-                    </defs>
-                    
-                    <circle cx="100" cy="100" r="95" fill="url(#signinGradient)" opacity="0.6"/>
-                    
-                    <!-- Lock illustration -->
-                    <rect x="60" y="70" width="80" height="50" rx="6" fill="none" stroke="#4ade80" stroke-width="2.5"/>
-                    <path d="M 75 70 V 55 Q 75 45 100 45 Q 125 45 125 55 V 70" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round"/>
-                    
-                    <!-- Keyhole -->
-                    <circle cx="100" cy="92" r="5" fill="#4ade80" opacity="0.3"/>
-                    <rect x="98" y="99" width="4" height="10" fill="#4ade80" opacity="0.2"/>
-                    
-                    <!-- Shine effect -->
-                    <rect x="65" y="75" width="50" height="8" fill="#86efac" opacity="0.3" rx="3"/>
-                    
-                    <!-- Decorative elements -->
-                    <circle cx="45" cy="50" r="7" fill="#6ee7b7" opacity="0.25"/>
-                    <circle cx="170" cy="130" r="9" fill="#4ade80" opacity="0.2"/>
-                </svg>
+    <div class="container signin-container">
+        <div class="glass-card auth-card">
+            <div class="card-header">
+                <a href="index.html" class="back-link">← Back</a>
+                <h2>Sign In</h2>
             </div>
 
-            <h1 class="title">Sign In</h1>
-            <p class="subtitle">Welcome back, we missed you</p>
-
-            <div id="successMessage" class="success-message"></div>
-
-            <form onsubmit="handleSignIn(event)">
+            <form id="signinForm" class="auth-form" novalidate>
                 <div class="form-group">
                     <label for="signinEmail">Email Address</label>
                     <input 
                         type="email" 
                         id="signinEmail" 
+                        name="email" 
                         placeholder="you@example.com"
-                        required
-                    >
-                    <span class="error-message" id="emailError"></span>
+                        required>
+                    <span class="form-error" id="signinEmailError"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="signinPassword">Password</label>
-                    <div class="password-wrapper">
-                        <input 
-                            type="password" 
-                            id="signinPassword" 
-                            placeholder="Enter your password"
-                            required
-                        >
-                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('signinPassword')">👁️</button>
-                    </div>
-                    <span class="error-message" id="passwordError"></span>
+                    <input 
+                        type="password" 
+                        id="signinPassword" 
+                        name="password" 
+                        placeholder="••••••••"
+                        required>
+                    <span class="form-error" id="signinPasswordError"></span>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 28px;">
-                    Sign In
-                </button>
+                <div class="form-group checkbox">
+                    <input 
+                        type="checkbox" 
+                        id="rememberMe" 
+                        name="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+                <div class="form-divider">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-buttons">
+                    <button type="button" class="social-btn google-btn" title="Sign in with Google">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button type="button" class="social-btn facebook-btn" title="Sign in with Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button type="button" class="social-btn twitter-btn" title="Sign in with Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                </div>
+
+                <p class="auth-link">Don't have an account? <a href="signup.html">Create one</a></p>
+                <p class="auth-link forgot-password"><a href="#">Forgot password?</a></p>
             </form>
 
-            <!-- Social Login Section -->
-            <div class="social-login">
-                <div class="social-divider">or signin via</div>
-                <div class="social-buttons">
-                    <button type="button" class="social-btn" title="Sign in with Google">G</button>
-                    <button type="button" class="social-btn" title="Sign in with Facebook">f</button>
-                    <button type="button" class="social-btn" title="Sign in with Twitter">𝕏</button>
-                </div>
+            <div class="success-message" id="signinSuccessMessage" style="display: none;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-width="2" stroke-linecap="round"/>
+                    <polyline points="22 4 12 14.01 9 11.01" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <p>Signed in successfully! Redirecting...</p>
             </div>
 
-            <div class="form-footer">
-                <p>Don't have an account? <a href="signup.html">Create one here</a></p>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <div class="info-header">
+                    <h3>Welcome back!</h3>
+                    <button type="button" class="btn-logout" id="logoutBtn">Logout</button>
+                </div>
+                <div class="user-details">
+                    <p><strong>Name:</strong> <span id="displayName"></span></p>
+                    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                    <p><strong>Joined:</strong> <span id="displayDate"></span></p>
+                </div>
             </div>
+        </div>
+
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
     </div>
 
